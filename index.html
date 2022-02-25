@@ -30,16 +30,18 @@
 
     <div class="cart">
         <b-card title="Shopping Cart">
-            <b-card-text>You Have {{ cart }} Items</b-card-text>
-            <b-button variant="primary">Remove Item</b-button>
+            <b-button v-on:click="showCart" variant="primary">View Shopping Cart</b-button>
         </b-card>
     </div>
 
+    <h1 v-show="displayThis">Shopping Cart</h1>
+    <h1 v-show="!displayThis">Inventory</h1>
     <!--product thing-->
-    <products :booklist="bookShit"></products>
-    <!--@add-to-cart="updateCart"-->
+    <products v-show="!displayThis" :booklist="bookShit"></products>
 
-
+    <div v-show="displayThis" v-for="book in bookShit.filter(x => x.inCart === true)">
+        <shopping-cart v-model:booklist="bookShit" v-bind:book="book" v-bind:booklist="bookShit"></shopping-cart>
+    </div>
 
 </div>
 
