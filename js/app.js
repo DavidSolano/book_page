@@ -10,7 +10,7 @@ const app = new Vue({
                 inventory: 40,
                 details: ["Author - Osamu Dazai", "Page Count - 271", "Translator - Donald Keene"],
                 getProductDetails: false,
-                bookPrice: 13.40,
+                bookPrice: 13.43,
                 bookDetails: "Portraying himself as a failure, the protagonist of Osamu Dazai's " +
                     "No Longer Human narrates a seemingly normal life even while he feels himself " +
                     "incapable of understanding human beings. Oba Yozo's attempts to reconcile himself " +
@@ -26,7 +26,7 @@ const app = new Vue({
                 inventory: 40,
                 details: ["Author - Ivan Goncharov", "Page Count - 576", "Translator - C. J. Hogarth"],
                 getProductDetails: false,
-                bookPrice: 18.00,
+                bookPrice: 18.53,
                 bookDetails: "Written with sympathetic humor and compassion, this masterful portrait" +
                     " of upper-class decline made Ivan Goncharov famous throughout Russia on its " +
                     "publication in 1859. Ilya Ilyich Oblomov is a member of Russia’s dying " +

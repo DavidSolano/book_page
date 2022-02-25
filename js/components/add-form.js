@@ -66,6 +66,9 @@ Vue.component('book', {
                         </b-card-text>
                     </div>
                     <b-card-text>
+                        price: {{book.bookPrice}}
+                    </b-card-text>
+                    <b-card-text>
                         <b-alert v-model="book.getProductDetails" variant="dark" dismissible>
                             <h4>Book Information</h4>
                             <hr>
