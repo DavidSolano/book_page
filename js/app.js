@@ -2,12 +2,20 @@ const app = new Vue({
     el: '#app',
     methods: {
       showCart() {
+          let total = 0;
           this.displayThis = !this.displayThis
+          for (let i = 0; i < this.bookArray.length; i++) {
+              if (this.bookArray[i].inCart === true) {
+                  total += this.bookArray[i].bookPrice
+              }
+          }
+          this.checkoutTotal = total;
+
       }
     },
     data: {
-        cart: 0,
-        bookShit: [
+        checkoutTotal: 0,
+        bookArray: [
             {
                 product: 'No Longer Human',
                 image: '../images/No Longer Human.jpg',
@@ -16,8 +24,8 @@ const app = new Vue({
                 details: ["Author - Osamu Dazai", "Page Count - 271", "Translator - Donald Keene"],
                 getProductDetails: false,
                 bookPrice: 13.43,
-                inCart: true,
-                showCart: true,
+                inCart: false,
+                showCart: false,
                 bookDetails: "Portraying himself as a failure, the protagonist of Osamu Dazai's " +
                     "No Longer Human narrates a seemingly normal life even while he feels himself " +
                     "incapable of understanding human beings. Oba Yozo's attempts to reconcile himself " +
