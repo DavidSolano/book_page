@@ -18,7 +18,7 @@ const app = new Vue({
         bookArray: [
             {
                 product: 'No Longer Human',
-                image: '../images/No Longer Human.jpg',
+                image: 'images/No Longer Human.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Osamu Dazai", "Page Count - 271", "Translator - Donald Keene"],
@@ -36,7 +36,7 @@ const app = new Vue({
             },
             {
                 product: 'Oblomov',
-                image: '../images/Oblomov.jpg',
+                image: 'images/Oblomov.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Ivan Goncharov", "Page Count - 576", "Translator - C. J. Hogarth"],
@@ -58,7 +58,7 @@ const app = new Vue({
             },
             {
                 product: 'The Bridge to Lucy Dunne',
-                image: '../images/The Bridge to Lucy Dunne.jpg',
+                image: 'images/The Bridge to Lucy Dunne.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Exurb1a", "Page Count - 166"],
@@ -73,7 +73,7 @@ const app = new Vue({
             },
             {
                 product: 'The Sweet Spot: The Pleasures of Suffering and the Search for Meaning',
-                image: '../images/The Sweet Spot.jpg',
+                image: 'images/The Sweet Spot.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Paul Bloom", "Page Count - 304"],
@@ -89,7 +89,7 @@ const app = new Vue({
             },
             {
                 product: 'Discourses and Selected Writings',
-                image: '../images/Epictetus.jpg',
+                image: 'images/Epictetus.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Epictetus", "Page Count - 304"],
@@ -106,7 +106,7 @@ const app = new Vue({
             },
             {
                 product: 'The Daily Stoic',
-                image: '../images/Daily Stoic.jpg',
+                image: 'images/Daily Stoic.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Ryan Holiday", "Page Count - 416"],
@@ -122,7 +122,7 @@ const app = new Vue({
             },
             {
                 product: 'Anxious: The Modern Mind in the Age of Anxiety',
-                image: '../images/anxious.jpg',
+                image: 'images/anxious.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Joseph LeDoux", "Page Count - 482"],
@@ -141,7 +141,7 @@ const app = new Vue({
             },
             {
                 product: 'Unwinding Anxiety',
-                image: '../images/Unwinding Anxiety.jpg',
+                image: 'images/Unwinding Anxiety.jpg',
                 inStock: true,
                 inventory: 40,
                 details: ["Author - Judson Brewer", "Page Count - 304"],
