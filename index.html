@@ -31,11 +31,15 @@
     <div class="cart">
         <b-card title="Shopping Cart">
             <b-card-text>You Have {{ cart }} Items</b-card-text>
+            <b-button variant="primary">Remove Item</b-button>
         </b-card>
     </div>
 
     <!--product thing-->
-    <products :booklist="bookShit" @add-to-cart="updateCart"></products>
+    <products :booklist="bookShit"></products>
+    <!--@add-to-cart="updateCart"-->
+
+
 
 </div>
 
