@@ -146,17 +146,6 @@ const ShoppingCartComponent = Vue.component('ShoppingCart', {
         }
     },
 
-    computed: {
-        cartTotal(){
-            let total = 0;
-            for (let i = 0; i < this.cartStuff.length; i++){
-                total += this.cartStuff[i].price
-            }
-
-            return total;
-        }
-    },
-
     template: `
         <div>
             <cart-item v-on:change="cartTotal" style="display: inline-block" v-for="item in cartStuff" :key="item.title" :item="item">
@@ -165,7 +154,7 @@ const ShoppingCartComponent = Vue.component('ShoppingCart', {
                     <b-card-text>
                         {{item.price}}
                     </b-card-text>
-                    <h1>Total: {{cartTotal}}</h1>
+                    
                 </b-card>
             </cart-item>
         </div>
