@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-<div id="app">
+<div id="app" class="container-fluid mt-3">
     <!-- nav -->
     <b-navbar toggleable="sm" type="light" variant="light">
         <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
@@ -26,30 +26,17 @@
                 <b-nav-text>Where all your book needs are met</b-nav-text>
             </b-navbar-nav>
         </b-collapse>
+
+        <b-navbar-nav class="ml-auto">
+            <b-button variant="primary" @click="showCart = !showCart" id="cart">Shopping Cart</b-button>
+        </b-navbar-nav>
     </b-navbar>
 
-    <b-container fluid>
-        <b-row>
-            <b-col>
-                <div class="cart">
-                    <b-card title="Shopping Cart">
-                        <b-button v-on:click="showCart" variant="primary">View Shopping Cart</b-button>
-                    </b-card>
-                </div>
-            </b-col>
-            <b-col>
-                <h1 v-show="displayThis">Shopping Cart</h1>
-                <h1 v-show="!displayThis">Inventory</h1>
-                <products v-show="!displayThis" :booklist="bookArray"></products>
+    <Inventory v-bind:showsthecart="showCart"></Inventory>
 
-                <div v-show="displayThis" v-for="book in bookArray.filter(x => x.inCart === true)">
-                    <shopping-cart v-model:booklist="bookArray" v-bind:book="book" v-bind:booklist="bookArray"></shopping-cart>
 
-                </div>
-                <h1 v-show="displayThis">Total: {{checkoutTotal}}</h1>
-            </b-col>
-        </b-row>
-    </b-container>
+
+
 </div>
 
 <!-- Load Vue followed by BootstrapVue -->
@@ -58,6 +45,7 @@
 <!-- Load the following for BootstrapVueIcons support -->
 <script src="//unpkg.com/bootstrap-vue@2.x/dist/bootstrap-vue-icons.min.js"></script>
 <!-- Load the app -->
+<script src="js/app-models.js"></script>
 <script src="js/components/app-components.js"></script>
 <script src="js/app.js"></script>
 

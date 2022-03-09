@@ -1,97 +1,173 @@
-Vue.component('products', {
+const InventoryComponent = Vue.component('Inventory', {
     props: {
-        booklist: {
-            type: Array,
+        showsthecart: {
+            type: Boolean,
             required: true
+        }
+    },
+    data() {
+        return {
+            library: [
+                new Book('Oblomov', 576, 'Ivan Goncharov', 18.53),
+                new Book('No Longer Human', 271, 'Osamu Dazai', 13.43),
+                new Book('The Bridge to Lucy Dunne', 166, 'Exurb1a', 3.99),
+                new Book('The Sweet Spot', 304, 'Paul Bloom', 19.85),
+                new Book('Discourses and Selected Writings', 304, 'Epictetus', 15.99),
+                new Book('The Daily Stoic', 416, 'Ryan Holiday', 17.32),
+                new Book('Anxious: The Modern Mind in the Age of Anxiety', 482, 'Joseph LeDoux'),
+                new Book('Unwinding Anxiety', 304, 'Judson Brewer', 19.99),
+
+                new Magazines('Local Man Drowns In River', 23, 'Kenny Bob', 'People', 4.55),
+                new Magazines('Local Hero Saves Man From Drowning', 4, 'Billy Smith', 'Vouge', 4.55),
+                new Magazines('Local Man Condemned For Not Helping Drowning Man', 34, 'Kelly Clarkson', 'TIme', 4.55),
+                new Magazines('10 Healthy Dishes that Will Change Your Life', 20, 'Jimmy Osborne', 'Time', 4.55)
+            ],
+            cartStuff: []
+        }
+    },
+    methods: {
+        addsToCart(a){
+            this.cartStuff.push(a);
+            console.log(this.cartStuff)
         }
     },
 
     template: `
-    <b-container class="p-0 m-0" fluid>
-        <b-card-group v-for="book in booklist">
-            <span class="d-inline-flex">
-                
-                <book v-bind:book="book" v-bind:booklist="booklist"></book>
-                
-            </span>
-        </b-card-group>
-    </b-container>
-    `,
-})
+    <div>
+        
+        <div class="card-columns" >
+            <inventory-item v-show="!showsthecart" @add-cart="addsToCart" v-for="item in library" :item="item" :key="item.title"></inventory-item>
+        </div>
+    
+        <div v-if="showsthecart === true">
+            <h2 class="text-center">Cart</h2>
+            <ShoppingCart v-bind:cartStuff="cartStuff"></ShoppingCart>
+        </div>
+        
+    </div>
+    
+    `
+});
 
-
-
-Vue.component('book', {
+const InventoryItemComponent = Vue.component('InventoryItem', {
     props: {
-        book: {
+        item: {
             type: Object,
-            required: true
-        },
+            required: true,
+        }
+    },
 
-        booklist: {
-            type: Array,
-            required: true
-        },
+    methods:{
+        changesThing(){
+            this.$emit('add-cart',this.item)
+            console.log('penis')
+        }
+    },
+
+    computed: {
+        typeOfItem() {
+            return this.item.constructor.name;
+        }
     },
 
     template: `
+        <b-card>
+            <component @add-cart="changesThing" :is="typeOfItem" :item="item"></component>
+        </b-card>
+        
+    `
+});
 
-    <b-card
-    :header="book.product"
-    
-    img-alt="Image"
-    img-overlay
-    tag="article"
-    style="max-width: 20rem"
-    class="mb-2 d-inline-flex p-0"
-    thumbnail
-  >
-    <b-card-img :src="book.image" alt="Image" top></b-card-img>
-    <div v-for="stuff in book.details">
-        <b-card-text>
-            {{stuff}}
-        </b-card-text>
-    </div>
-    <b-card-text>
-       Price: {{book.bookPrice}}
-    </b-card-text>
-    <hr>
-    <b-alert v-model="book.getProductDetails" variant="dark" dismissible>
-        <h4>Book Information</h4>
-        <hr>
-        <p>
-            {{ book.bookDetails }}
-        </p>
-    </b-alert>
-    
-   
-    <b-button @click="book.inCart=true" variant="primary">Add to Cart</b-button>
-      
-    <b-button @click="book.getProductDetails=true" variant="primary">Get Info</b-button>
-  </b-card>
 
+const BookComponent = Vue.component('Book', {
+    extends: InventoryItemComponent,
+    template: `
+        <div class="book" style="max-width: 450px; max-height: 400px">
+            <b-card>
+                <h3>{{item.title}}</h3>
+            </b-card>
+            <b-card-text>
+                <ul>
+                    <li>Author: {{item.author}}</li>
+                    <li>Page Count: {{item.pageCount}}</li>
+                    <li>Price: {{item.price}}</li>
+                </ul>
+            </b-card-text>
+            
+            <b-button pill variant="primary" type="button" @click="changesThing" v-if="item.status === 'available'">Add to Cart</b-button>
+        </div>
+    `
+});
+
+const MagazineComponent = Vue.component('Magazines', {
+    extends: InventoryItemComponent,
+    template: `
+        <div class="magazine" style="max-width: 450px; max-height: 400px">
+            
+            <b-card>
+                <h3>{{item.title}}</h3>
+            </b-card>
+            <b-card-text>
+                <ul>
+                    <li>Author: {{item.author}}</li>
+                    <li>Company: {{item.company}}</li>
+                    <li>Page Count: {{item.pageCount}}</li>
+                    <li>Price: {{item.price}}</li>
+                </ul>
+            </b-card-text>
+            
+            <b-button pill variant="primary" type="button" @click="changesThing" v-if="item.status === 'available'">Add to Cart</b-button>
+        </div>
+    `
+});
+
+const CartItemComponent = Vue.component('cart-item', {
+    extends: InventoryItemComponent,
+    template: `
+        <div>
+            <b-card>
+                <b-card-text>
+                    {{item.title}}
+                </b-card-text>
+
+                <b-card-text>
+                    {{item.price}}
+                </b-card-text>
+            </b-card>
+        </div>
     `
 })
 
-Vue.component ('shopping-cart', {
+const ShoppingCartComponent = Vue.component('ShoppingCart', {
     props: {
-        book: {
-            type: Object,
-            required: true
-        },
-
-        booklist: {
+        cartStuff: {
             type: Array,
             required: true
         }
     },
 
+    computed: {
+        cartTotal(){
+            let total = 0;
+            for (let i = 0; i < this.cartStuff.length; i++){
+                total += this.cartStuff[i].price
+            }
+
+            return total;
+        }
+    },
+
     template: `
-    <b-card :title="book.product">
-        <b-card-text>
-            price: {{book.bookPrice}}
-        </b-card-text>
-    </b-card>
-    
+        <div>
+            <cart-item v-on:change="cartTotal" style="display: inline-block" v-for="item in cartStuff" :key="item.title" :item="item">
+                <b-card>
+                    <h3 class="card-title">{{item.title}}</h3>
+                    <b-card-text>
+                        {{item.price}}
+                    </b-card-text>
+                    <h1>Total: {{cartTotal}}</h1>
+                </b-card>
+            </cart-item>
+        </div>
     `
 })
